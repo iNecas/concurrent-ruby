@@ -54,8 +54,6 @@ module Concurrent
           latch_1.wait(1)
           threads.each {|t| t.kill }
 
-          thread_1 = Thread.new { first_value = subject.exchange(10) }
-          thread_2 = Thread.new { second_value = subject.exchange(12) }
           threads = [
             Thread.new { first_value = subject.exchange(10); latch_2.count_down },
             Thread.new { second_value = subject.exchange(12); latch_2.count_down }
