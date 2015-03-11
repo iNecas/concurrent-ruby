@@ -15,9 +15,8 @@ lazy = Concurrent::LazyReference.new{ nil }
 delay.value
 lazy.value
 
-Benchmark.bm do |x|
-  puts 'Benchmarking Delay...'
-  x.report { n.times{ delay.value } }
-  puts 'Benchmarking Lazy...'
-  x.report { n.times{ lazy.value } }
+Benchmark.bmbm do |bm|
+  puts 'Benchmarking Delay first, then LazyReference...'
+  bm.report { n.times{ delay.value } }
+  bm.report { n.times{ lazy.value } }
 end
